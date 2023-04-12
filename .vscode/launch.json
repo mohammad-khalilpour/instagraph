@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "twitch_clone",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "twitch_clone (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "iphone",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "05ABC56B-03AB-4ADA-9D88-329C4F8491CF"
+        },
+        {
+            "name": "web",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "chrome"
+        },
+        {
+            "name": "mac",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "macos"
+        }
+    ],
+    "compounds": [
+        { 
+            "name": "All Devices",
+            "configurations": ["mac","iphone","web"]
+        }
+    ]
+}
