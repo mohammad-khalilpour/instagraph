@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "627378669023",
+    "project_id": "instagraph-kian",
+    "storage_bucket": "instagraph-kian.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627378669023:android:b4b07b4c73c53c24cab06a",
+        "android_client_info": {
+          "package_name": "ir.coderats.instagraph"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627378669023-m7bhu2o297k6er59frdfn93pam1idcam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhgYjyZbDP4y-HebYwKxfcS-GKGV8of3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627378669023-m7bhu2o297k6er59frdfn93pam1idcam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
