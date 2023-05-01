@@ -31,7 +31,7 @@ class CustomTextField extends StatelessWidget {
         obscureText: isPassword,
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
-          fillColor: Color.fromARGB(255, 10, 2, 23),
+          fillColor: const Color.fromARGB(255, 10, 2, 23),
           filled: true,
           hintText: hint,
           border: inputBorder,

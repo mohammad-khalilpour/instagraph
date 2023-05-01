@@ -1,17 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:instagraph/extentions/page_route_extentions.dart';
+import 'package:instagraph/state/auth/providers/auth_provider.dart';
+import '../../constants/constants.dart';
+import '../../widgets/custom_text_field.dart';
 
-import '../constants/constants.dart';
-import '../widgets/custom_text_field.dart';
-
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class SignUpScreenState extends ConsumerState<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
@@ -150,8 +152,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             SizedBox(
                               width: 240,
                               child: ElevatedButton(
-                                onPressed: () {},
-                                child: const Text('Next'),
+                                onPressed: () async {
+                                  try {
+                                    await ref
+                                        .read(authStateProvider.notifier)
+                                        .signUp(
+                                          userNameController.text.trim(),
+                                          emailController.text.trim(),
+                                          passwordController.text.trim(),
+                                          fullNameController.text,
+                                        );
+                                    // ignore: use_build_context_synchronously
+                                    context.popRoute();
+                                  } catch (_) {}
+                                },
+                                child: const Text('Sign Up'),
                               ),
                             ),
                             hGap16,
@@ -165,8 +180,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     hGap8,
                     Container(
-                      width: 340,
-                      height: 60,
+                      width: containerWidth,
                       decoration: BoxDecoration(
                         border: Border.all(),
                       ),
@@ -175,7 +189,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           const Text("Have an account? "),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.popRoute();
+                            },
                             child: const Text('Log in'),
                           ),
                         ],

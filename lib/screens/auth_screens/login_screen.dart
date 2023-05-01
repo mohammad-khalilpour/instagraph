@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:instagraph/constants/constants.dart';
+import 'package:instagraph/constants/route_names.dart';
+import 'package:instagraph/extentions/page_route_extentions.dart';
+import 'package:instagraph/screens/auth_screens/signup_screen.dart';
 import 'package:instagraph/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -145,7 +148,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   "Don't have an account? ",
                                 ),
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.pushRoute(RouteNames.signUpScreen);
+                                  },
                                   child: const Text('Sign up'),
                                 ),
                               ],

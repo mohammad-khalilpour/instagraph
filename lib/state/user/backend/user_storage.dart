@@ -3,16 +3,17 @@ import 'package:instagraph/constants/firebase_constants.dart';
 import 'package:instagraph/state/user/model/user_model.dart';
 
 class UserStorage {
-  final usersCollection =
-      FirebaseFirestore.instance.collection(FirebaseConstants.users);
+  const UserStorage();
 
   Future<bool> saveUserInfo({
     required String userId,
     required String username,
     required String? email,
+    required String fullName,
   }) async {
     try {
-      final userInfo = await usersCollection
+      final userInfo = await FirebaseFirestore.instance
+          .collection(FirebaseConstants.users)
           .where(FirebaseConstants.userId, isEqualTo: userId)
           .limit(1)
           .get();
@@ -21,6 +22,7 @@ class UserStorage {
         await userInfo.docs.first.reference.update({
           FirebaseConstants.username: username,
           FirebaseConstants.email: email ?? '',
+          FirebaseConstants.fullName: fullName,
         });
         return true;
       }
@@ -29,9 +31,12 @@ class UserStorage {
         userId: userId,
         username: username,
         email: email,
+        fullName: fullName,
       );
 
-      await usersCollection.add(user);
+      await FirebaseFirestore.instance
+          .collection(FirebaseConstants.users)
+          .add(user);
       return true;
     } catch (_) {
       return false;

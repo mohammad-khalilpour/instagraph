@@ -6,4 +6,5 @@ class FirebaseConstants {
   static const userId = 'uid';
   static const username = 'username';
   static const email = 'email';
+  static const fullName = 'fullName';
 }
