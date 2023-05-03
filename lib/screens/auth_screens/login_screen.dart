@@ -1,25 +1,27 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instagraph/constants/constants.dart';
 import 'package:instagraph/constants/route_names.dart';
 import 'package:instagraph/extentions/page_route_extentions.dart';
-import 'package:instagraph/screens/auth_screens/signup_screen.dart';
+import 'package:instagraph/state/auth/providers/auth_provider.dart';
 import 'package:instagraph/widgets/custom_text_field.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
   void dispose() {
     emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -71,8 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   width: 2 / 3.4 * containerWidth,
                                   controller: emailController,
                                   isPassword: false,
-                                  hint: 'phone number, username, or email',
-                                  textInputType: TextInputType.none,
+                                  hint: 'email',
+                                  textInputType: TextInputType.emailAddress,
                                 ),
                                 hGap8,
                                 CustomTextField(
@@ -86,7 +88,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SizedBox(
                                   width: 2 / 3 * containerWidth,
                                   child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      try {
+                                        await ref
+                                            .read(authStateProvider.notifier)
+                                            .logIn(
+                                              emailController.text.trim(),
+                                              passwordController.text.trim(),
+                                            );
+                                      } catch (_) {}
+                                    },
                                     child: const Text('Log in'),
                                   ),
                                 ),

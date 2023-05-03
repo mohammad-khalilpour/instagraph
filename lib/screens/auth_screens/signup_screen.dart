@@ -17,7 +17,6 @@ class SignUpScreenState extends ConsumerState<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
-
   final TextEditingController userNameController = TextEditingController();
 
   @override
@@ -105,8 +104,8 @@ class SignUpScreenState extends ConsumerState<SignUpScreen> {
                               width: 2 / 3.4 * containerWidth,
                               controller: emailController,
                               isPassword: false,
-                              hint: 'mobile number or email',
-                              textInputType: TextInputType.none,
+                              hint: 'email',
+                              textInputType: TextInputType.emailAddress,
                             ),
                             hGap8,
                             CustomTextField(
