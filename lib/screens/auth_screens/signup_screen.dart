@@ -45,7 +45,7 @@ class SignUpScreenState extends ConsumerState<SignUpScreen> {
                     Container(
                       width: containerWidth,
                       decoration: BoxDecoration(
-                        border: Border.all(),
+                        border: Border.all(color: Colors.white),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(20),
@@ -181,7 +181,7 @@ class SignUpScreenState extends ConsumerState<SignUpScreen> {
                     Container(
                       width: containerWidth,
                       decoration: BoxDecoration(
-                        border: Border.all(),
+                        border: Border.all(color: Colors.white),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

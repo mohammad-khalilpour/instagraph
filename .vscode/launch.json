@@ -38,7 +38,7 @@
     "compounds": [
         { 
             "name": "All Devices",
-            "configurations": ["mac","iphone","web"]
+            "configurations": ["iphone","web"]
         }
     ]
 }

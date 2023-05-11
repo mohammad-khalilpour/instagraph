@@ -74,6 +74,7 @@ flutter:
     - assets/Screenshot 1402-01-11 at 13.24.39.png
     - assets/google-play-badge.png
     - assets/5a902db97f96951c82922874.png
+    - assets/blank-profile-picture-973460__340.webp
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

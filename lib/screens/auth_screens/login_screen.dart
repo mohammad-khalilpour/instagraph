@@ -55,7 +55,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         Container(
                           width: containerWidth,
                           decoration: BoxDecoration(
-                            border: Border.all(),
+                            border: Border.all(color: Colors.white),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(20),
@@ -147,7 +147,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         Container(
                           width: containerWidth,
                           decoration: BoxDecoration(
-                            border: Border.all(),
+                            border: Border.all(color: Colors.white),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),

@@ -29,7 +29,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.black,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Colors.black,
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+        ),
+      ),
       routes: {
         RouteNames.mainScreen: (context) => const MainScreen(),
         RouteNames.loginScreen: (context) => const LoginScreen(),
@@ -40,7 +48,6 @@ class MyApp extends StatelessWidget {
           final isLoggedIn = ref.watch(isLoggedInProvider);
           if (isLoggedIn) {
             return const MainScreen();
-            
           } else {
             return const LoginScreen();
           }
