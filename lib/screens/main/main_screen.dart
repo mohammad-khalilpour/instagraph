@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../addpost/add_post_screen.dart';
 import 'package:instagraph/screens/profile/profile_app_bar.dart';
 import 'package:instagraph/screens/profile/profile_body.dart';
 
@@ -18,7 +19,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     final List<Widget> screen = [
       Container(),
       Container(),
-      Container(),
+      const AddPostScreen(),
       Container(),
       const ProfileScreenBody(),
     ];
@@ -101,7 +102,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   }
 
   Widget _bottomNavigationBar() {
-    return Container(
+    return SizedBox(
       height: 60,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,

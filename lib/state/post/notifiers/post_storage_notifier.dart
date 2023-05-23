@@ -1,0 +1,28 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:instagraph/state/post/backend/post_storage.dart';
+import 'package:instagraph/typdefs/is_loading.dart';
+
+class PostStorageNotifier extends StateNotifier<IsLoading> {
+  PostStorageNotifier() : super(false);
+
+  final _postStorage = const PostStorage();
+
+  set isLoading(bool value) => state = value;
+
+  Future<void> createPost({
+    required String userId,
+    required String description,
+    required Uint8List file,
+  }) async {
+    try {
+      isLoading = true;
+      await _postStorage.createPost(
+        userId: userId,
+        description: description,
+        file: file,
+      );
+      isLoading = false;
+    } catch (_) {}
+  }
+}

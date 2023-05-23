@@ -21,7 +21,7 @@ class UserStorage {
       if (userInfo.docs.isNotEmpty) {
         await userInfo.docs.first.reference.update({
           FirebaseConstants.username: username,
-          FirebaseConstants.email: email ?? '',
+          FirebaseConstants.email: email,
           FirebaseConstants.fullName: fullName,
         });
         return true;
@@ -32,6 +32,11 @@ class UserStorage {
         username: username,
         email: email,
         fullName: fullName,
+        profilePicture: null,
+        profileDescription: null,
+        followers: [],
+        following: [],
+        posts: [],
       );
 
       await FirebaseFirestore.instance
@@ -41,5 +46,20 @@ class UserStorage {
     } catch (_) {
       return false;
     }
+  }
+
+  Future<void> addPost({
+    required String userId,
+    required String postId,
+  }) async {
+    final userInfo = await FirebaseFirestore.instance
+        .collection(FirebaseConstants.users)
+        .where(FirebaseConstants.userId, isEqualTo: userId)
+        .limit(1)
+        .get();
+
+    userInfo.docs.first.reference.update({
+      FirebaseConstants.posts: FieldValue.arrayUnion([postId])
+    });
   }
 }
