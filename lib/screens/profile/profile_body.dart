@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instagraph/constants/constants.dart';
+import 'package:instagraph/screens/profile/user_posts_view.dart';
 import 'package:instagraph/widgets/custom_button.dart';
 
 class ProfileScreenBody extends ConsumerStatefulWidget {
@@ -13,6 +14,7 @@ class ProfileScreenBody extends ConsumerStatefulWidget {
 class _ProfileScreenState extends ConsumerState<ProfileScreenBody> {
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Column(
@@ -80,27 +82,8 @@ its nice to be important but its important to be nice
             height: 0.2,
             color: Colors.white,
           ),
-          Expanded(
-            child: GridView.builder(
-              itemCount: 15,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, childAspectRatio: 0.85),
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: const EdgeInsets.all(1),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    color: const Color.fromARGB(115, 84, 84, 84),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Picture $index',
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ),
-                );
-              },
-            ),
+          const Expanded(
+            child: UserPostsView()
           ),
         ],
       ),

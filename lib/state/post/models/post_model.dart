@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:instagraph/constants/firebase_constants.dart';
 
 class PostModel extends MapView<String, Object?> {
@@ -21,4 +22,17 @@ class PostModel extends MapView<String, Object?> {
             FirebaseConstants.comments: [],
           },
         );
+
+
+  factory PostModel.fromMap(Map<String, dynamic> map) {
+    return PostModel(
+      postId: map[FirebaseConstants.postId] as String,
+      fileAddress: map[FirebaseConstants.fileAddress] as String,
+      description: map[FirebaseConstants.description] as String,
+    );
+  }
+
+
+
+
 }
