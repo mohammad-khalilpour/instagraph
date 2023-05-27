@@ -16,6 +16,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         result: AuthResult.success,
         isLoading: false,
         userId: _authenticator.userId,
+        username: _authenticator.username,
       );
     }
   }
@@ -32,6 +33,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     state = AuthState(
       result: result,
       isLoading: false,
+      username: _authenticator.username,
       userId: _authenticator.userId,
     );
   }
@@ -43,6 +45,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     state = AuthState(
       result: result,
       isLoading: false,
+      username: _authenticator.username,
       userId: _authenticator.userId,
     );
     saveUserInfo(fullName: fullName);

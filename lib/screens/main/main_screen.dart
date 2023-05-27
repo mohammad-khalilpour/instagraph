@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:instagraph/state/auth/providers/user_id_provider.dart';
+import 'package:instagraph/state/auth/providers/user_name_provider.dart';
 import '../addpost/add_post_screen.dart';
 import 'package:instagraph/screens/profile/profile_app_bar.dart';
 import 'package:instagraph/screens/profile/profile_body.dart';
@@ -16,12 +18,15 @@ class _MainScreenState extends ConsumerState<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userId = ref.read(userIdProvider);
     final List<Widget> screen = [
       Container(),
       Container(),
       const AddPostScreen(),
       Container(),
-      const ProfileScreenBody(),
+      ProfileScreenBody(
+        userId: userId ?? '',
+      ),
     ];
 
     final List<AppBar> appBar = [

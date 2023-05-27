@@ -15,9 +15,10 @@ class FirebaseConstants {
   static const posts = 'posts';
 
   // post constants
-  static const postId = 'uid';
+  static const postId = 'postId';
   static const fileAddress = 'fileAddress';
   static const description = 'description';
   static const comments = 'comments';
   static const createdAt = 'createdAt';
+  static const likes = 'likes';
 }

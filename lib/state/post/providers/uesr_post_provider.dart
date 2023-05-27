@@ -1,31 +1,29 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instagraph/constants/firebase_constants.dart';
-import 'package:instagraph/state/auth/providers/user_id_provider.dart';
 import 'package:instagraph/state/post/models/post_model.dart';
 import 'package:instagraph/state/user/provider/user_provider.dart';
 
-final userPostsProvider = StreamProvider.autoDispose<Iterable<PostModel>>(
-  (ref) {
+final userPostsProvider =
+    StreamProvider.family.autoDispose<Iterable<PostModel>, String>(
+  (ref, userId) {
     final controller = StreamController<Iterable<PostModel>>();
 
     controller.onListen = () {
       controller.sink.add([]);
     };
 
-    final userId = ref.read(userIdProvider);
-    final user = ref.watch(userProvider(userId!));
-    final postIdList = user.when(
+    final user = ref.watch(userProvider(userId));
+    final username = user.when(
       data: (userModel) {
-        return userModel.posts;
+        return userModel.username;
       },
       error: (error, stacktrace) {
-        return List.empty();
+        return null;
       },
       loading: () {
-        return List.empty();
+        return null;
       },
     );
 
@@ -37,7 +35,7 @@ final userPostsProvider = StreamProvider.autoDispose<Iterable<PostModel>>(
           FirebaseConstants.createdAt,
           descending: true,
         )
-        .where(FirebaseConstants.postId, whereIn: postIdList)
+        .where(FirebaseConstants.username, isEqualTo: username)
         .snapshots()
         .listen(
       (snapshot) {

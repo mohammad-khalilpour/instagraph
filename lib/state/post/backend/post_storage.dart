@@ -11,6 +11,7 @@ class PostStorage {
 
   Future<void> createPost({
     required String userId,
+    required String username,
     required String description,
     required Uint8List file,
   }) async {
@@ -23,8 +24,11 @@ class PostStorage {
 
     final post = PostModel(
       postId: postId,
+      username: username,
       fileAddress: downloadUrl,
       description: description,
+      comments: [],
+      likes: [],
     );
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.posts)
@@ -33,5 +37,29 @@ class PostStorage {
       userId: userId,
       postId: postId,
     );
+  }
+
+  Future<void> like({required String userId, required String postId}) async {
+    final postInfo = await FirebaseFirestore.instance
+        .collection(FirebaseConstants.posts)
+        .where(FirebaseConstants.postId, isEqualTo: postId)
+        .limit(1)
+        .get();
+
+    postInfo.docs.first.reference.update({
+      FirebaseConstants.likes: FieldValue.arrayUnion([userId])
+    });
+  }
+
+  Future<void> unlike({required String userId, required String postId}) async {
+    final postInfo = await FirebaseFirestore.instance
+        .collection(FirebaseConstants.posts)
+        .where(FirebaseConstants.postId, isEqualTo: postId)
+        .limit(1)
+        .get();
+
+    postInfo.docs.first.reference.update({
+      FirebaseConstants.likes: FieldValue.arrayRemove([userId])
+    });
   }
 }

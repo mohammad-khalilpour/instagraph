@@ -1,34 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:instagraph/state/user/provider/username_provider.dart';
+import 'package:instagraph/extentions/page_route_extentions.dart';
+import 'package:instagraph/state/auth/providers/auth_provider.dart';
+import '../../state/auth/providers/user_name_provider.dart';
 
 AppBar profileAppBar(BuildContext context) {
   return AppBar(
     title: Consumer(
       builder: (context, ref, child) {
         final username = ref.watch(usernameProvider);
-        return Text(username.asData?.value ?? "");
+        return Text(username ?? '');
       },
     ),
     actions: [
-      IconButton(
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return ListView(
-                  children: [
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.settings),
-                      label: const Text('privacy and setting'),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-          icon: const Icon(Icons.menu)),
+      Consumer(
+        builder: (context, ref, child) {
+          return IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return ListView(
+                    children: [
+                      TextButton.icon(
+                        onPressed: () {
+                          ref.read(authStateProvider.notifier).logOut();
+                          context.popRoute();
+                        },
+                        icon: const Icon(Icons.logout),
+                        label: const Text('Log out'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            icon: const Icon(Icons.menu),
+          );
+        },
+      ),
     ],
     shape: const Border(
       bottom: BorderSide(

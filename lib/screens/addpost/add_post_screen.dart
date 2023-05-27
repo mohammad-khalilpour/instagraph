@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagraph/state/auth/providers/user_id_provider.dart';
 import 'package:instagraph/state/post/providers/post_storage_provider.dart';
+import '../../state/auth/providers/user_name_provider.dart';
 import '../../utils/utils.dart';
 
 class AddPostScreen extends StatefulWidget {
@@ -47,14 +48,17 @@ class _AddPostScreenState extends State<AddPostScreen> {
               actions: <Widget>[
                 HookConsumer(builder: (context, ref, widget) {
                   final currentUserId = ref.read(userIdProvider);
+                  final currentUsername = ref.read(usernameProvider);
                   return TextButton(
                     onPressed: () async {
                       await ref.read(postStorageProvider.notifier).createPost(
                             userId: currentUserId!,
+                            username: currentUsername!,
                             description: description.text,
                             file: _file!,
                           );
                       _file = null;
+                      setState(() {});
                     },
                     child: const Text(
                       "Post",

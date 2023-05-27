@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instagraph/state/post/providers/uesr_post_provider.dart';
+import 'package:instagraph/widgets/post_page.dart';
 
 class UserPostsView extends ConsumerWidget {
-  const UserPostsView({Key? key}) : super(key: key);
+  final String username;
+  const UserPostsView({
+    required this.username,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final posts = ref.watch(userPostsProvider);
+    final posts = ref.watch(userPostsProvider(username));
     return RefreshIndicator(
       onRefresh: () {
         return Future.delayed(
@@ -27,14 +32,31 @@ class UserPostsView extends ConsumerWidget {
                   crossAxisCount: 3, childAspectRatio: 0.85),
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  margin: const EdgeInsets.all(1),
+                  margin: const EdgeInsets.all(1.5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
                     color: const Color.fromARGB(115, 84, 84, 84),
                   ),
-                  child: Center(
-                    child: Image(
-                      image: NetworkImage(posts.elementAt(index).fileAddress),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => PostPage(
+                            postId: posts.elementAt(index).postId,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Center(
+                      child: AspectRatio(
+                        aspectRatio: 0.85,
+                        child: Image(
+                          image: NetworkImage(
+                            posts.elementAt(index).fileAddress,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                 );
@@ -43,7 +65,7 @@ class UserPostsView extends ConsumerWidget {
           }
         },
         error: (error, stackTrace) {
-          return const RefreshProgressIndicator();
+          return const Text('data');
         },
         loading: () {
           return const RefreshProgressIndicator();

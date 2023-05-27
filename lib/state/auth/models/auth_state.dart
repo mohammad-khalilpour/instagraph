@@ -4,23 +4,27 @@ import 'package:instagraph/state/auth/models/auth_result.dart';
 class AuthState {
   final AuthResult? result;
   final bool isLoading;
+  final String? username;
   final String? userId;
 
   const AuthState({
     required this.result,
     required this.isLoading,
+    required this.username,
     required this.userId,
   });
 
   const AuthState.unknown()
       : result = null,
         isLoading = false,
+        username = null,
         userId = null;
 
   AuthState copyWithIsLoading(bool isLoading) {
     return AuthState(
       result: result,
       isLoading: isLoading,
+      username: username,
       userId: userId,
     );
   }

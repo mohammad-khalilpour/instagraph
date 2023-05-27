@@ -12,6 +12,7 @@ class PostStorageNotifier extends StateNotifier<IsLoading> {
 
   Future<void> createPost({
     required String userId,
+    required String username,
     required String description,
     required Uint8List file,
   }) async {
@@ -19,9 +20,34 @@ class PostStorageNotifier extends StateNotifier<IsLoading> {
       isLoading = true;
       await _postStorage.createPost(
         userId: userId,
+        username: username,
         description: description,
         file: file,
       );
+      isLoading = false;
+    } catch (_) {}
+  }
+
+  Future<void> like({required String userId, required String postId}) async {
+    try {
+      isLoading = true;
+      await _postStorage.like(
+        userId: userId,
+        postId: postId,
+      );
+      isLoading = false;
+      isLoading = false;
+    } catch (_) {}
+  }
+
+  Future<void> unlike({required String userId, required String postId}) async {
+    try {
+      isLoading = true;
+      await _postStorage.unlike(
+        userId: userId,
+        postId: postId,
+      );
+      isLoading = false;
       isLoading = false;
     } catch (_) {}
   }
